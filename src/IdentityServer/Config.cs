@@ -31,6 +31,22 @@ namespace IdentityServer
 
             // scopes that client has access to
             AllowedScopes = { "api1" }
+        },
+         new Client
+        {
+            ClientId = "OSX",
+
+            // no interactive user, use the clientid/secret for authentication
+            AllowedGrantTypes = GrantTypes.ClientCredentials,
+
+            // secret for authentication
+            ClientSecrets =
+            {
+                new Secret("OSXPassword".Sha256())
+            },
+
+            // scopes that client has access to
+            AllowedScopes = { "api1" }
         }
          };
     }
