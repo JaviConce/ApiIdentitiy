@@ -51,11 +51,10 @@ namespace Api.Controller
             
         }
 
-        // POST api/orden
+        // POST api/orden/add
 
     
-        [HttpPost]
-        [Route("add")]
+        [HttpPost("add")]
         [AllowAnonymous]
         public void Post([FromBody] string value)
         {
@@ -73,21 +72,21 @@ namespace Api.Controller
         public string Delete(int id)
         {
             Lista lista = new Lista();
+            List<Lista> tdlis = new List<Lista>();
             string json = "";
+
 
 
             foreach (Lista _lista in lista.cargarLista())
             {
-                if (_lista.Id.Equals(id))
+                if (_lista.Id!=id)
                 {
-                }
-                else
-                {
-
-                    json = Newtonsoft.Json.JsonConvert.SerializeObject(_lista, Newtonsoft.Json.Formatting.Indented);
-
+                    tdlis.Add(_lista);
                 }
             }
+
+            json = Newtonsoft.Json.JsonConvert.SerializeObject(tdlis, Newtonsoft.Json.Formatting.Indented);
+
             return json;
 
 
