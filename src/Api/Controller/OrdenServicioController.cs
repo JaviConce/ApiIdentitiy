@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 namespace Api.Controller
 {
     [Route("api/orden")]
-    [AllowAnonymous]
+    [Authorize]
     public class OrdenServicioController : ControllerBase
     {
         // GET: api/orden
@@ -55,7 +55,6 @@ namespace Api.Controller
 
     
         [HttpPost("add")]
-        [AllowAnonymous]
         public void Post([FromBody] string value)
         {
             List<Lista> lista = new List<Lista>();
