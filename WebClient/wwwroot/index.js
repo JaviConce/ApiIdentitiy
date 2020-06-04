@@ -16,7 +16,28 @@ $('#btngetall').click(function (e) {
 });
 
 function getall() {
-        
+    $.ajax({
+        url: urlPrueba,
+        type: 'POST',
+        data: JSON.stringify({
+            user: usuario,
+            pass: contraseña
+        }),
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            let respuestaServicioWeb = JSON.parse(data.d);
+            $('#resultado').text(respuestaServicioWeb);
+            if (respuestaServicioWeb = 'true') {
+                window.location = "detail.html";
+            }
+
+        },
+        error: function (xhr) {
+            console.error('Error: ', xhr);
+        }
+
+    });
 }
 
 
@@ -36,14 +57,14 @@ function log() {
 }
 
 
-mgr.getUser().then(function (user) {
+/*mgr.getUser().then(function (user) {
     if (user) {
         log("User logged in", user.profile);
     }
     else {
         log("User not logged in");
     }
-});
+});*/
 
 function login() {
     //mgr.signinRedirect();
@@ -75,7 +96,7 @@ function login() {
     });
 }
 
-function api() {
+/*function api() {
     mgr.getUser().then(function (user) {
         var url = "http://localhost:5001/identity";
 
@@ -91,7 +112,7 @@ function api() {
 
 function logout() {
     mgr.signoutRedirect();
-}
+}*/
 
 
 function mostrarid(id){
