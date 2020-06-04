@@ -7,16 +7,18 @@ using System.Threading.Tasks;
 using Api.Componentes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Api.Controller
 {
     [Route("api/orden")]
-    [Authorize]
+    [AllowAnonymous]
     public class OrdenServicioController : ControllerBase
     {
-        // GET: api/<OrdenServicioController>
+        // GET: api/orden
         [HttpGet]
         public string Get()
         {
@@ -29,7 +31,7 @@ namespace Api.Controller
 
         }
 
-        // GET api/<OrdenServicioController>/5
+        // GET api/orden/1062
         [HttpGet("{id}")]
         public string Get(int id)
         {
@@ -43,29 +45,52 @@ namespace Api.Controller
                 {
                    json = Newtonsoft.Json.JsonConvert.SerializeObject(_lista, Newtonsoft.Json.Formatting.Indented);
                 }
-
             }
             return json ;
             
             
         }
 
-        // POST api/<OrdenServicioController>
+        // POST api/orden
+
+    
         [HttpPost]
+        [Route("add")]
+        [AllowAnonymous]
         public void Post([FromBody] string value)
         {
+            List<Lista> lista = new List<Lista>();
+            Lista response = JsonConvert.DeserializeObject<Lista>(value);
+            lista.Add(response);
+
         }
 
-        // PUT api/<OrdenServicioController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        
 
         // DELETE api/<OrdenServicioController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("delete/{id}")]
+      
+        public string Delete(int id)
         {
+            Lista lista = new Lista();
+            string json = "";
+
+
+            foreach (Lista _lista in lista.cargarLista())
+            {
+                if (_lista.Id.Equals(id))
+                {
+                }
+                else
+                {
+
+                    json = Newtonsoft.Json.JsonConvert.SerializeObject(_lista, Newtonsoft.Json.Formatting.Indented);
+
+                }
+            }
+            return json;
+
+
         }
     }
 }
