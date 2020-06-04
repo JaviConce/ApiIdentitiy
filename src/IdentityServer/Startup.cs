@@ -20,6 +20,10 @@ namespace IdentityServer
                 .AddInMemoryClients(Config.Clients);
 
             builder.AddDeveloperSigningCredential();
+
+
+           
+
         }
 
         public void Configure(IApplicationBuilder app)

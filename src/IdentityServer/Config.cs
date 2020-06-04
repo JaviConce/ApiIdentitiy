@@ -38,6 +38,10 @@ namespace IdentityServer
 
             // no interactive user, use the clientid/secret for authentication
             AllowedGrantTypes = GrantTypes.ClientCredentials,
+            //esto lo añadi para que fuera
+            RedirectUris =           { "http://localhost:5001/callback.html" },
+            PostLogoutRedirectUris = { "http://localhost:5001/index.html" },
+            AllowedCorsOrigins =     { "http://localhost:5001" },
 
             // secret for authentication
             ClientSecrets =

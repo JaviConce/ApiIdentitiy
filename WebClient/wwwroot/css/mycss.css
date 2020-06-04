@@ -1,0 +1,16 @@
+.containercenter{
+    width: 35%;
+    margin: auto;
+    margin-top:15%;
+};
+.btnizq{
+    text-align: right;
+}
+.p{
+    display: inline;
+}
+.btncenter{
+    width: 20px;
+    height: 100%;
+
+}
