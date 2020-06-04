@@ -41,7 +41,7 @@ namespace Api.Controller
             {
                 if (_lista.Id.Equals(id))
                 {
-                   json = Newtonsoft.Json.JsonConvert.SerializeObject(_lista.cargarLista(), Newtonsoft.Json.Formatting.Indented);
+                   json = Newtonsoft.Json.JsonConvert.SerializeObject(_lista, Newtonsoft.Json.Formatting.Indented);
                 }
 
             }
