@@ -18,31 +18,34 @@ namespace Api.Controller
     {
         // GET: api/<OrdenServicioController>
         [HttpGet]
-        public List<Lista> Get()
+        public string Get()
         {
            Lista lista = new Lista();
-            Console.WriteLine(lista.cargarLista().Count);
-            
-            return lista.cargarLista();
 
-        
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(lista.cargarLista(), Newtonsoft.Json.Formatting.Indented);
+
+            return json;
+
+
         }
 
         // GET api/<OrdenServicioController>/5
         [HttpGet("{id}")]
-        public Lista Get(int id)
+        public string Get(int id)
         {
             Lista lista = new Lista();
-           
-            foreach(Lista _lista in lista.cargarLista())
+            string json="";
+
+
+            foreach (Lista _lista in lista.cargarLista())
             {
                 if (_lista.Id.Equals(id))
                 {
-                    return _lista;
+                   json = Newtonsoft.Json.JsonConvert.SerializeObject(_lista.cargarLista(), Newtonsoft.Json.Formatting.Indented);
                 }
 
             }
-            return null;
+            return json ;
             
             
         }
