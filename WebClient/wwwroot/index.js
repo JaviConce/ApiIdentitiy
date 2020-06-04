@@ -16,12 +16,15 @@ $('#btngetall').click(function (e) {
 });
 
 function getall() {
+    let urlPrueba = 'http://localhost:6001/api/orden';
+    let usuario = $('#txtUsuario').val();
+    let contraseña = $('#txtPass').val();
     $.ajax({
         url: urlPrueba,
         type: 'POST',
         data: JSON.stringify({
-            user: usuario,
-            pass: contraseña
+            ClientId: usuario,
+            ClientSecret: contraseña
         }),
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -76,8 +79,8 @@ function login() {
         url: urlPrueba,
         type: 'POST',
         data: JSON.stringify({
-            user: usuario,
-            pass: contraseña
+            ClientId: usuario,
+            ClientSecret: contraseña
         }),
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -96,7 +99,7 @@ function login() {
     });
 }
 
-/*function api() {
+function api() {
     mgr.getUser().then(function (user) {
         var url = "http://localhost:5001/identity";
 
@@ -112,7 +115,7 @@ function login() {
 
 function logout() {
     mgr.signoutRedirect();
-}*/
+}
 
 
 function mostrarid(id){
