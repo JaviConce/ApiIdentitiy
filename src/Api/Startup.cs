@@ -24,11 +24,24 @@ namespace Api
 
                     options.Audience = "api1";
                 });
+
+            services.AddCors(options =>
+            {
+                // this defines a CORS policy called "default"
+                options.AddPolicy("default", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5001")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
+            //cors
+            app.UseCors("default");
 
             app.UseAuthentication();
             app.UseAuthorization();
