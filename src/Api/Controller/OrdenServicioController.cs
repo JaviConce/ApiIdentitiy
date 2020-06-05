@@ -52,15 +52,12 @@ namespace Api.Controller
         }
 
         // POST api/orden/add
-
-    
-        [HttpPost("add")]
-        public void Post([FromBody] string value)
+        [HttpPost]
+        public void Post( Lista value)
         {
             List<Lista> lista = new List<Lista>();
-            Lista response = JsonConvert.DeserializeObject<Lista>(value);
-            lista.Add(response);
-
+        
+           
         }
 
         
