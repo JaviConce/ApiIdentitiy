@@ -1,43 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿using Api.Entidades;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api.Componentes
+namespace Api.AccesoDatos
 {
-    public class Lista
+    public class OrdenServicioRepositorio
     {
-		#region Prodpiedades
-		public int Id;
-		public string Nombre;
-		public string EstadoNombre;
-		public string PBINombre;
-		public string ResponsableNombre;
-		public string TipoNombre;
-		#endregion
+		private string jsonConListadoDeTareas;
 
-		#region Constructor y desconstructor
-		public Lista() { }
-		~Lista() { }
-		#endregion
-
-		#region Metodos de acceso a datos para web
-
-		public List<Lista> cargarLista()
-		{
-			try
-			{
-				return JsonConvert.DeserializeObject<List<Lista>>(obtenerJsonDeLista());
-			}
-			catch (Exception e)
-			{
-				throw e;
-			}
-		}
-		private string obtenerJsonDeLista()
-		{
-			string jsonConListadoDeTareas = @"[{
+        public OrdenServicioRepositorio()
+        {
+			jsonConListadoDeTareas = @"[{
 								'Id': 1062,
 								'Nombre': '1062 - (Desestimado) Archivos duplicados',
 								'EstadoNombre': 'Resolved',
@@ -86,12 +62,49 @@ namespace Api.Componentes
 								'TipoNombre': 'Tarea'
 							}
 						]";
+        }
 
-			return jsonConListadoDeTareas;
+        public void Eliminar(int id)
+        {
+			var item = ObtenerPorId(id);
+
+			if (item != null)
+			{
+				var lista = ObtenerTodo().ToList();
+				lista.Remove(item);
+
+				jsonConListadoDeTareas = JsonConvert.SerializeObject(lista);
+			}
+        }
+
+        //trae todas las tareas, es como un select * from tabla
+        public IEnumerable<OrdenServicio> ObtenerTodo()
+		{
+			try
+			{
+				return JsonConvert.DeserializeObject<IEnumerable<OrdenServicio>>(jsonConListadoDeTareas);
+			}
+			catch (Exception e)
+			{
+				throw e;
+			}
 		}
-		#endregion
+        public int Agregar(OrdenServicio ordenServicio)
+        {
+			var lista = ObtenerTodo().ToList();
+			var ultimoElemento = lista.Last();
+			ordenServicio.Id = ultimoElemento.Id +1;
 
+			lista.Add(ordenServicio);
 
-	
-	}
+			jsonConListadoDeTareas = JsonConvert.SerializeObject(lista);
+
+			return ordenServicio.Id;
+		}
+
+        public OrdenServicio ObtenerPorId(int id)
+        {
+            return ObtenerTodo().FirstOrDefault(x=> x.Id == id);
+        }
+    }
 }
