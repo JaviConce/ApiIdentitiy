@@ -74,43 +74,43 @@ function login() {
     let urlPrueba = 'http://localhost:5001/Account/Login';
     let usuario = $('#txtUsuario').val();
     let contraseña = $('#txtPass').val();
-    $.ajax({
-        url: urldatos,
-        type: 'POST',
-        data: null,
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: function (data) {
-            let datos = JSON.parse(data.d)
-            let response = document.querySelector('#response')
-            response.innerHTML = '';
-            for (let item of datos) {
-                response.innerHTML += ` 
-               <div class="card container mt-5">
-               <div class="card-body ">
-                   <div class="row">
+    //$.ajax({
+    //    url: urldatos,
+    //    type: 'POST',
+    //    data: null,
+    //    dataType: 'json',
+    //    contentType: 'application/json; charset=utf-8',
+    //    success: function (data) {
+    //        let datos = JSON.parse(data.d)
+    //        let response = document.querySelector('#response')
+    //        response.innerHTML = '';
+    //        for (let item of datos) {
+    //            response.innerHTML += ` 
+    //           <div class="card container mt-5">
+    //           <div class="card-body ">
+    //               <div class="row">
                       
-                       <button onclick="mostrarid(${item.Id})" class=" col bg-primary btn text-white float-left" >Informacion</button>  
-                       <div class="col-10">
-                           <b>Nombre: </b> <i>${item.Nombre} </i><br><br>
+    //                   <button onclick="mostrarid(${item.Id})" class=" col bg-primary btn text-white float-left" >Informacion</button>  
+    //                   <div class="col-10">
+    //                       <b>Nombre: </b> <i>${item.Nombre} </i><br><br>
        
-                           <b>Responsable:</b> <i>${item.ResponsableNombre} </i>
-                           <b>Tipo: </b> <i>${item.TipoNombre}</i>
-                           <b>PBI: </b> <i>${item.PBINombre}</i>
-                       </div>
-                   </div>
-               </div>
-           </div> `
+    //                       <b>Responsable:</b> <i>${item.ResponsableNombre} </i>
+    //                       <b>Tipo: </b> <i>${item.TipoNombre}</i>
+    //                       <b>PBI: </b> <i>${item.PBINombre}</i>
+    //                   </div>
+    //               </div>
+    //           </div>
+    //       </div> `
 
 
-            }
-        },
-        error: function (xhr) {
-            console.error('Error: ', xhr);
-        }
-    });
+    //        }
+    //    },
+    //    error: function (xhr) {
+    //        console.error('Error: ', xhr);
+    //    }
+    //});
 
-    /*$.ajax({
+    $.ajax({
         url: urlPrueba,
         type: 'POST',
         data: JSON.stringify({
@@ -120,6 +120,7 @@ function login() {
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
         success: function (data) {
+            console.log(data);
             let respuestaServicioWeb = JSON.parse(data.d);
             $('#resultado').text(respuestaServicioWeb);
             if (respuestaServicioWeb = 'true') {
@@ -131,7 +132,7 @@ function login() {
             console.error('Error: ', xhr);
         }
 
-    });*/
+    });
 }
 
 function api() {

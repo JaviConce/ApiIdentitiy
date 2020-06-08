@@ -106,5 +106,16 @@ namespace Api.AccesoDatos
         {
             return ObtenerTodo().FirstOrDefault(x=> x.Id == id);
         }
+
+		public void Actualizar(int id, OrdenServicio ordenServicioNueva)
+		{
+			var ordenServicio = ObtenerPorId(id);
+
+			if (ordenServicio != null)
+			{
+				ordenServicio.Nombre = ordenServicioNueva.Nombre; //mappping + adelante, veremos automapper _mapper<OrdenServicio>(ordenServicioDto);  // DTO : Data transfer object
+				ordenServicio.PBINombre = ordenServicioNueva.PBINombre;
+			}
+		}
     }
 }
