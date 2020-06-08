@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "src\Api\Api.csproj",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "src\Client\Client.csproj", "{A1F5F7BB-05EA-451E-8CB9-611753F5FDCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{C55EFF38-8344-41F1-BD70-80E81F23A165}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "src\WebClient\WebClient.csproj", "{C55EFF38-8344-41F1-BD70-80E81F23A165}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
