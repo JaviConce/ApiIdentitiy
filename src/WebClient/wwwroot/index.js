@@ -1,12 +1,13 @@
 //var config = {
 //    authority: "http://localhost:5001",
-//    client_id: "js",
-//    redirect_uri: "http://localhost:5001/callback.html",
+//    client_id: "api1",
+//    redirect_uri: "http://localhost:5003/callback.html",
 //    response_type: "code",
-//    scope: "openid profile api1",
-//    post_logout_redirect_uri: "http://localhost:5001/index.html",
+//    scope: "api1",
 //};
 //var mgr = new Oidc.UserManager(config);
+
+
 
 $('#btnlogin').click(function (e){
     login();
@@ -14,6 +15,31 @@ $('#btnlogin').click(function (e){
 $('#btngetall').click(function (e) {
     getall();
 });
+
+$('#btngettoken').click(function (e) {
+    var form = new FormData();
+    form.append("grant_type", "password");
+    form.append("scopes", "api1");
+    form.append("client_id", "api1");
+    form.append("client_secret", "secret");
+    form.append("UserName", "operador1");
+    form.append("password", "123");
+
+    var settings = {
+        "url": "https://localhost:5001/connect/token",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form
+    };
+
+    $.ajax(settings).done(function (response) {
+        alert(response);
+    });
+});
+
 
 function getall() {
     let urlPrueba = 'http://localhost:6001/api/orden';

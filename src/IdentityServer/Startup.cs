@@ -17,13 +17,10 @@ namespace IdentityServer
 
             var builder = services.AddIdentityServer()
                 .AddInMemoryApiResources(Config.Apis)
-                .AddInMemoryClients(Config.Clients);
+                .AddInMemoryClients(Config.Clients)
+                .AddTestUsers(Config.GetUsers());
 
             builder.AddDeveloperSigningCredential();
-
-
-           
-
         }
 
         public void Configure(IApplicationBuilder app)

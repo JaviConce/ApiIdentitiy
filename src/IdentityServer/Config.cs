@@ -3,55 +3,49 @@
 
 
 using IdentityServer4.Models;
+using IdentityServer4.Test;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace IdentityServer
 {
     public static class Config
     {
+        public static List<TestUser> GetUsers()
+        {
+            return new List<TestUser>
+                {
+                    new TestUser
+                    {
+                        SubjectId = "1",
+                        Username = "operador1",
+                        Password = "123"
+                    },
+                    new TestUser
+                    {
+                        SubjectId = "2",
+                        Username = "OSX",
+                        Password = "OSXPassword"
+                    }
+                };
+        }
+
         public static IEnumerable<ApiResource> Apis =>
         new List<ApiResource>
         {
             new ApiResource("api1", "My API")
         };
+
         public static IEnumerable<Client> Clients => new List<Client>
         {
-        new Client
-        {
-            ClientId = "api1",
-
-            // no interactive user, use the clientid/secret for authentication
-            AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-            // secret for authentication
-            ClientSecrets =
+            new Client
             {
-                new Secret("api1".Sha256())
-            },
-
-            // scopes that client has access to
-            AllowedScopes = { "api1" }
-        },
-         new Client
-        {
-            ClientId = "OSX",
-
-            // no interactive user, use the clientid/secret for authentication
-            AllowedGrantTypes = GrantTypes.ClientCredentials,
-            //esto lo añadi para que fuera
-            RedirectUris =           { "http://localhost:5001/callback.html" },
-            PostLogoutRedirectUris = { "http://localhost:5001/index.html" },
-            AllowedCorsOrigins =     { "http://localhost:5001" },
-
-            // secret for authentication
-            ClientSecrets =
-            {
-                new Secret("OSXPassword".Sha256())
-            },
-
-            // scopes that client has access to
-            AllowedScopes = { "api1" }
-        }
-         };
+                AllowAccessTokensViaBrowser = true,
+                ClientId = "api1",
+                AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                ClientSecrets = { new Secret("secret".Sha256()) },
+                AllowedScopes = { "api1" }
+            }
+        };
     }
 }
