@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 namespace Api.Controller
 {
     [Route("api/orden")]
-    [Authorize]
+    //[Authorize]
     public class OrdenServicioController : ControllerBase
     {
         private readonly OrdenServicioRepositorio ordenServicioRepositorio;
@@ -38,7 +38,7 @@ namespace Api.Controller
             return Ok(ordenServicioRepositorio.ObtenerPorId(id));
         }
 
-        // POST api/orden/add
+        // POST api/orden/add   
         [HttpPost]
         public IActionResult Crear([FromBody] OrdenServicio ordenServicio)
         {
