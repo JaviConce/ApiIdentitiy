@@ -37,7 +37,8 @@ namespace IdentityServer
             app.UseDeveloperExceptionPage();
 
             app.UseIdentityServer();
-
+            //cors
+            app.UseCors("default");
         }
     }
 }
