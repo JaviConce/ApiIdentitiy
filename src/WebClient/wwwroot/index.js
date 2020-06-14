@@ -4,7 +4,7 @@ $('#btnlogin').click(function (e){
 $('#btngetall').click(function (e) {
     getall();
 });
-$('#btnEditar').click(function (e) {
+$('.btn-editar').click(function (e) {
     console.log("boton pulsado");
     let id = $(this).val();
     console.log("id cogida");
@@ -153,8 +153,8 @@ function cargarDetail(datos) {
                     <b >PBI: </b><p>${item.pbiNombre}</p> 
                 </div>
                 <div class="col-3">
-                    <button type="button" id="btnEditar" value="${item.id}" style="background-color: orange;">Editar</button>
-                    <button type="button" id="btnEliminar" value="${item.id}" style="background-color: red;">Eliminar</button>
+                    <button class=" btn btn-warning btn-editar" type="button" id="btnEditar" value="${item.id}" style="background-color: orange;">Editar</button>
+                    <button class=" btn btn-danger" type="button" id="btnEliminar" value="${item.id}" style="background-color: red;">Eliminar</button>
                 </div>
             </div>
         </div>
