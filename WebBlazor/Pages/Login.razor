@@ -1,25 +1,62 @@
 ﻿@page "/login"
 
-    <body>
-        <div class="containercenter shadow-lg p-3 mb-5 bg-white rounded ">
+<body>
+    <div class="containercenter shadow-lg p-3 mb-5 bg-white rounded ">
 
-            <div class="m-2">
-                <label for="exampleInputEmail1">Usuario</label>
-                <input class="form-control" id="txtUsuario">
-                <small id="HelpUser" class="form-text text-muted">No des tus credenciales a nadie</small>
-            </div>
-            <div class="m-2">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <button type="button" id="btnlogin" class=" btn btn-primary col-3 m-2">Login</button>
-
-
+        <div class="m-2">
+            <label for="exampleInputEmail1">Usuario</label>
+            <input class="form-control" id="txtUsuario">
+            <small id="HelpUser" class="form-text text-muted">No des tus credenciales a nadie</small>
         </div>
+        <div class="m-2">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="button" id="btnlogin" class=" btn btn-primary col-3 m-2">Login</button>
+
+
+        <label class="text-danger">@errorMsg</label>
+        <label class="text-success">@token</label> 
+    </div>
 
        
-    </body>
+</body>
 
-    @code {
+@code {
 
+    string errorMsg;
+    string token;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        HttpClient client = new HttpClient();
+        DiscoveryDocumentResponse disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
+        if (disco.IsError)
+        {
+            errorMsg = disco.Error;
+            return;
+        }
+
+        TokenResponse tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
+        {
+            Address = disco.TokenEndpoint,
+            ClientId = "api1",
+            ClientSecret = "secret",
+
+            UserName = "operador1",
+            Password = "123",
+            Scope = "api1"
+        });
+
+        if (tokenResponse.IsError)
+        {
+            errorMsg = tokenResponse.Error;
+            return;
+        }
+
+        token = tokenResponse.Json.ToString();
     }
+
+
+}
