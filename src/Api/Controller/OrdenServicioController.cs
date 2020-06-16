@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 namespace Api.Controller
 {
     [Route("api/orden")]
-    //[Authorize]
+    [Authorize]
     public class OrdenServicioController : ControllerBase
     {
         private readonly OrdenServicioRepositorio ordenServicioRepositorio;
