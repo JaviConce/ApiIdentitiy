@@ -6,12 +6,12 @@
 
         <div class="m-2">
             <label for="exampleInputEmail1">Usuario</label>
-            <input class="form-control" id="txtUsuario">
+            <input class="form-control" id="txtUsuario" @bind-value="user">
             <small id="HelpUser" class="form-text text-muted">No des tus credenciales a nadie</small>
         </div>
         <div class="m-2">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <input type="password" class="form-control" @bind-value="password" id="exampleInputPassword1">
         </div>
         <button type="button" id="btnlogin" @onclick="IniciarSesionAsync" class=" btn btn-primary col-3 m-2">Login</button>
 
@@ -27,7 +27,8 @@
 
     string errorMsg;
     string token;
-
+    string user;
+    string password;
 
     protected async Task IniciarSesionAsync()
     {
@@ -45,8 +46,8 @@
             ClientId = "api1",
             ClientSecret = "secret",
 
-            UserName = "operador1",
-            Password = "123",
+            UserName = user,
+            Password = password,
             Scope = "api1"
         });
 
