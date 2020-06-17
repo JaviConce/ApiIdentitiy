@@ -1,4 +1,5 @@
 ﻿@page "/login"
+@inject NavigationManager NavigationManager
 
 <body>
     <div class="containercenter shadow-lg p-3 mb-5 bg-white rounded ">
@@ -12,14 +13,14 @@
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1">
         </div>
-        <button type="button" id="btnlogin" class=" btn btn-primary col-3 m-2">Login</button>
+        <button type="button" id="btnlogin" @onclick="IniciarSesionAsync" class=" btn btn-primary col-3 m-2">Login</button>
 
 
         <label class="text-danger">@errorMsg</label>
-        <label class="text-success">@token</label> 
+        <label class="text-success">@token</label>
     </div>
 
-       
+
 </body>
 
 @code {
@@ -28,7 +29,7 @@
     string token;
 
 
-    protected override async Task OnInitializedAsync()
+    protected async Task IniciarSesionAsync()
     {
         HttpClient client = new HttpClient();
         DiscoveryDocumentResponse disco = await client.GetDiscoveryDocumentAsync("https://localhost:5001");
@@ -54,8 +55,11 @@
             errorMsg = tokenResponse.Error;
             return;
         }
-
-        token = tokenResponse.Json.ToString();
+        else
+        {
+            token = tokenResponse.Json.ToString();
+            //NavigationManager.NavigateTo("/Index");
+        }
     }
 
 
