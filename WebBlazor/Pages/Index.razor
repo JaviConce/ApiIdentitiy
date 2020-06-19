@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/index"
 
 <h1>Hello, world!</h1>
 
@@ -6,29 +6,3 @@ Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
-<button></button>
-
-@foreach (var item in listaPBI)
-{
-    <p>@item.Nombre</p>
-    <button></button>
-}
-
-
-@code {
-
-    
-    IEnumerable<ListaPBI> listaPBI = new List<ListaPBI>() {
-        new ListaPBI() { Nombre = "pepe "},
-        new ListaPBI() { Nombre= "pedro" }
-    };
-
-    public class ListaPBI {
-        public string Nombre { get; set; }
-    }
-
-
-    //get de los items y lo van a grabar en una variable que se va a llamar listaPBI
-
-
-}
